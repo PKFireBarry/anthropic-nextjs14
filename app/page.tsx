@@ -1,6 +1,8 @@
 'use client';
- 
+import Image from 'next/image';
 import { useChat } from 'ai/react';
+import linkedin from '../app/linkedin.svg'
+import github from '../app/github.svg'
  
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, stop, reload } = useChat()
@@ -8,27 +10,46 @@ export default function Chat() {
   console.log(messages); // Logs the chat history as an array
  
   return (
-<div className="mx-auto max-w-md py-8 flex flex-col items-center min-h-screen w-full">
+<div className="mx-auto py-8 bg-[#98c0d0] flex gap-2 flex-col items-center min-h-screen w-full">
 
-  <header className="flex items-center h-16 px-4 border-b border-gray-200 w-full sm:px-6">
-    <span className="font-semibold text-lg">Anthropic Cluade 3 + NextJS Starter</span>
-  </header>
+<header className="flex items-center justify-evenly h-16 px-4 border bg-black  border-gray-200 w-full sm:px-6 shadow-md">
+  <span className="font-semibold text-lg  text-white">Anthropic Cluade 3 + NextJS</span>
+    <a target="_blank" href='https://github.com/PKFireBarry'>
+      <Image
+          height={33}
+          width={33}
+          className=" w-[33px] h-[33px]"
+          alt=""
+          src={github}
+        />      
+    </a>
+  <a target="_blank" href='https://www.linkedin.com/in/darion-george/'>
+      <Image
+          height={33}
+          width={33}
+          className=" w-[33px] h-[33px] mx-4"
+          alt=""
+          src={linkedin}
+        />      
+    </a>
+</header>
 
-  <div className="flex-1 max-h-[calc(100vh - 16rem)] overflow-y-auto  mx-8">
-    {messages.map(m => (
-      <div key={m.id} className={`p-4 w-screen rounded ${m.role === 'user' ? 'bg-gray-200 ml-auto' : 'bg-blue-100 mr-auto'} max-w-full my-2`}>
-        <span className="font-semibold">{m.role === 'user' ? 'User:' : 'AI:'}</span>
-        <p className=" p-2">{m.content}</p>
-      </div>
-    ))}
-  </div>
+<div className="flex-1 max-h-[calc(100vh - 16rem)] bg-[#e2e9eb] overflow-y-auto mx-8 p-4 border rounded-md shadow-md">
+  {messages.map(m => (
+    <div key={m.id} className={`p-4 rounded-md max-w-full my-2 ${m.role === 'user' ? 'bg-gray-300 ml-auto' : 'bg-[#41a1c9] mr-auto'}`}>
+      <span className={`font-semibold capitalize ${m.role === 'user' ? 'text-gray-800' : 'text-blue-900'}`}>{m.role}:</span>
+      <p className="p-2 text-gray-800">{m.content}</p>
+    </div>
+  ))}
+</div>
 
-  <form onSubmit={handleSubmit} className="fixed bottom-0 left-0 right-0 w-full p-4 flex gap-2 bg-gray-100">
+<div className="fixed bottom-0 left-0 right-0 w-full my-1 bg-black py-4 border-t border-gray-200 shadow-md">
+  <form onSubmit={handleSubmit} className="flex p-1 gap-2">
     <input
       value={input}
       onChange={handleInputChange}
       placeholder="Ask me something..."
-      className="rounded-md flex-grow p-2 focus:outline-none"
+      className="rounded-md flex-grow p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
     <button
       disabled={isLoading}
@@ -52,8 +73,12 @@ export default function Chat() {
       Stop
     </button>
   </form>
-  
 </div>
+
+</div>
+
+
+
 
 
   );
