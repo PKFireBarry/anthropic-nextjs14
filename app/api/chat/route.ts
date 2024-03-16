@@ -19,9 +19,12 @@ export async function POST(req: Request) {
     model: 'claude-3-haiku-20240307',
     stream: true,
     max_tokens: 300,
+    temperature: 0.1,
+    
   });
  
   const stream = AnthropicStream(response, {
+
     onCompletion: async (completion: string) => {
       // This callback is called when the completion is ready
       // You can use this to save the final completion to your database
