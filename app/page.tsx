@@ -38,7 +38,7 @@ export default function Chat() {
       {isLoading ? 'Streaming...' : 'Send'}
     </button>
     <button
-      onClick={reload}
+      onClick={reload as any}
       type="button"
       className={`bg-blue-500 ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'} text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
     >
